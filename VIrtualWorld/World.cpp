@@ -1,7 +1,20 @@
 #include "World.h"
 
-World::World(int rows, int cols) {}
+World::World() {}
+World::World(int rows, int cols, int oc) {
+	organismsC = 0;
 
-void World::NextTurn() {}
+	board = new Board(rows, cols);
+
+	for (int i = 0; i < oc; i++) {
+	}
+}
+World::~World() {
+	delete board;
+}
+
+void World::NextTurn() {
+	organisms.sort(Organism::Compare);
+}
 
 void World::Draw() {}

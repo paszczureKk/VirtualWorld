@@ -1,13 +1,20 @@
 #pragma once
 
+#include <list>
+#include "Organism.h"
+#include "Board.h"
+
 class World {
 	public :
-		World(int rows, int cols);
+		World();
+		World(int rows, int cols, int oc);
+		~World();
 		
 		void NextTurn();
 	private:
-		//std::list<Organism*> organisms;
+		std::list<Organism*> organisms;
 		int organismsC;
+		Board* board;
 
 		void Draw();
 };

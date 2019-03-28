@@ -1,5 +1,6 @@
 #include "Organism.h"
 #include <iostream>
+#include "World.h"
 
 Organism::Organism(int s, int i, int a, Point l, World& w) {
 	strength = s;
@@ -7,10 +8,6 @@ Organism::Organism(int s, int i, int a, Point l, World& w) {
 	age = a;
 	location = l;
 	world = &w;
-}
-
-int Organism::CallI() {
-	return initiative;
 }
 
 bool Organism::Compare(Organism* current, Organism* other) {

@@ -111,8 +111,8 @@
     <ClCompile Include="HeracleumSosnowskyi.cpp">
       <Filter>Pliki źródłowe\Organisms\Plants</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
-      <Filter>Pliki źródłowe\Utilities</Filter>
+    <ClCompile Include="Board.cpp">
+      <Filter>Pliki źródłowe\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +167,10 @@
     <ClInclude Include="Navigation.h">
       <Filter>Pliki nagłówkowe\Game</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="Board.h">
+      <Filter>Pliki nagłówkowe\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers.h">
       <Filter>Pliki nagłówkowe\Utilities</Filter>
     </ClInclude>
   </ItemGroup>

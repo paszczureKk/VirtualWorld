@@ -1,6 +1,6 @@
 #pragma once
 
-#include "World.h"
+#include "Headers.h"
 #include "Navigation.h"
 
 class Organism {
@@ -11,7 +11,6 @@ class Organism {
 		virtual void Collision() = 0;
 		virtual void Draw() = 0;
 
-		int CallI();
 		static bool Compare(Organism* current, Organism* other);
 	private :
 		int strength;
@@ -19,4 +18,5 @@ class Organism {
 		int age;
 		Point location;
 		World* world;
+		int *p;
 };

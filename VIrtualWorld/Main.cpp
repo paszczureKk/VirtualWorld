@@ -3,8 +3,10 @@
 #include <iostream>
 
 #include <list>
+
 #include "Navigation.h"
 
+#include "World.h"
 #include "Organism.h"
 #include "Animal.h"
 #include "Plant.h"
@@ -26,7 +28,7 @@ int main() {
 	std::list<Organism*> organisms;
 
 	Point p = Point();
-	World* world = new World(10, 10);
+	World *world = new World(10, 10, 10);
 	int iterator = 0;
 
 	Belladonna* belladonna = new Belladonna(iterator++, p, *world);
@@ -68,16 +70,12 @@ int main() {
 	o = (Organism*)wolf;
 	organisms.push_back(o);
 	
-
-	for (auto it = organisms.begin(); it != organisms.end(); ++it)
-		std::cout << ' ' << (*it)->CallI();
-	std::cout << std::endl;
 	
 	organisms.sort(Organism::Compare);
 
-	for (auto it = organisms.begin(); it != organisms.end(); ++it)
+	/*for (auto it = organisms.begin(); it != organisms.end(); ++it)
 		std::cout << ' ' << (*it)->CallI();
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 
 	delete world;
 
