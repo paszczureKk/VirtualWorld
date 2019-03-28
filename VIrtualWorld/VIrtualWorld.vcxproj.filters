@@ -13,5 +13,162 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Organisms">
+      <UniqueIdentifier>{866b2de5-82fc-4876-ba2d-72d175e95e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Organisms\Animals">
+      <UniqueIdentifier>{5f45a5e8-2bea-47f7-b2f9-4fb44c28c099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Organisms\Plants">
+      <UniqueIdentifier>{4bcf51a8-3c2f-4ea7-a5e1-1ca4128a662c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Organisms\Abstract">
+      <UniqueIdentifier>{c31384df-da20-4ccd-b1ca-64c8d46e49f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Organisms\Unique">
+      <UniqueIdentifier>{34efdd9c-e3fe-494e-beec-196015e00f41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Game">
+      <UniqueIdentifier>{b6a34b36-9a41-4feb-a7ca-971a385177ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Game">
+      <UniqueIdentifier>{e028338e-eb44-4c20-9563-c98fe361213e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Organisms">
+      <UniqueIdentifier>{fe313433-51d8-4218-aa54-0716d52cb0e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Organisms\Animals">
+      <UniqueIdentifier>{74688189-6de6-4bce-a8e6-494917507c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Organisms\Plants">
+      <UniqueIdentifier>{cf6825fe-fabb-4092-8715-d261f82d0335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Organisms\Abstract">
+      <UniqueIdentifier>{7b13356a-2945-4a4e-b430-67a742036e10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Organisms\Unique">
+      <UniqueIdentifier>{856a49d1-6ae2-46a5-a7f0-ccdd5f58ef97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Utilities">
+      <UniqueIdentifier>{a67e7b3a-432c-4a40-b5db-495d8b7d390c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Utilities">
+      <UniqueIdentifier>{11a7d7e2-df92-4e20-af62-8e7e851e542e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Organism.cpp">
+      <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Animal.cpp">
+      <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation.cpp">
+      <Filter>Pliki źródłowe\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Pliki źródłowe\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Antelope.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="CyberSheep.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Fox.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheep.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Turtle.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Wolf.cpp">
+      <Filter>Pliki źródłowe\Organisms\Animals</Filter>
+    </ClCompile>
+    <ClCompile Include="Human.cpp">
+      <Filter>Pliki źródłowe\Organisms\Unique</Filter>
+    </ClCompile>
+    <ClCompile Include="Belladonna.cpp">
+      <Filter>Pliki źródłowe\Organisms\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="Guarana.cpp">
+      <Filter>Pliki źródłowe\Organisms\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="Grass.cpp">
+      <Filter>Pliki źródłowe\Organisms\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="Dandelion.cpp">
+      <Filter>Pliki źródłowe\Organisms\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="HeracleumSosnowskyi.cpp">
+      <Filter>Pliki źródłowe\Organisms\Plants</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>Pliki źródłowe\Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Antelope.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="CyberSheep.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Fox.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheep.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Turtle.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Wolf.h">
+      <Filter>Pliki nagłówkowe\Organisms\Animals</Filter>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Organism.h">
+      <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal.h">
+      <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Human.h">
+      <Filter>Pliki nagłówkowe\Organisms\Unique</Filter>
+    </ClInclude>
+    <ClInclude Include="Belladonna.h">
+      <Filter>Pliki nagłówkowe\Organisms\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="Dandelion.h">
+      <Filter>Pliki nagłówkowe\Organisms\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="Grass.h">
+      <Filter>Pliki nagłówkowe\Organisms\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="Guarana.h">
+      <Filter>Pliki nagłówkowe\Organisms\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="HeracleumSosnowskyi.h">
+      <Filter>Pliki nagłówkowe\Organisms\Plants</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Pliki nagłówkowe\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation.h">
+      <Filter>Pliki nagłówkowe\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Pliki nagłówkowe\Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
