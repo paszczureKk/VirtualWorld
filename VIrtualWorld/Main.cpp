@@ -25,7 +25,7 @@
 #include "HeracleumSosnowskyi.h"
 
 int main() {
-	std::list<Organism*> organisms;
+	/*std::list<Organism*> organisms;
 
 	Point p = Point();
 	World *world = new World(10, 10, 10);
@@ -73,9 +73,9 @@ int main() {
 	
 	organisms.sort(Organism::Compare);
 
-	/*for (auto it = organisms.begin(); it != organisms.end(); ++it)
+	for (auto it = organisms.begin(); it != organisms.end(); ++it)
 		std::cout << ' ' << (*it)->CallI();
-	std::cout << std::endl;*/
+	std::cout << std::endl;
 
 	delete world;
 
@@ -90,7 +90,7 @@ int main() {
 	delete fox;
 	delete sheep;
 	delete turtle;
-	delete wolf;
+	delete wolf;*/
 
 	system("pause");
 }

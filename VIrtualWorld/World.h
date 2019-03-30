@@ -1,8 +1,8 @@
 #pragma once
 
 #include <list>
-#include "Organism.h"
-#include "Board.h"
+class Organism;
+class Board;
 
 class World {
 	public :
@@ -12,8 +12,9 @@ class World {
 		
 		void NextTurn();
 	private:
-		std::list<Organism*> organisms;
 		int organismsC;
+
+		std::list<Organism*> organisms;
 		Board* board;
 
 		void Draw();

@@ -4,6 +4,6 @@
 
 class Guarana : Plant {
 	public:
-		Guarana(int a, Point p, World& w);
+		Guarana(int a, Point p, World* w);
 	private:
 };

@@ -4,6 +4,6 @@
 
 class Grass : Plant {
 	public:
-		Grass(int a, Point p, World& w);
+		Grass(int a, Point p, World* w);
 	private:
 };

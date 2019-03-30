@@ -1,18 +1,20 @@
 #include "Board.h"
-#include <cstdlib>
+#include "Utilities.h"
+#include "Organism.h"
+#include <iostream>
 
 Board::Board(int r, int c) {
 	row = r;
 	col = c;
 
-	o = new Organism*[ r*c ];
+	organisms = new Organism*[ r*c ];
 
 	for (int i = 0; i < row*col; i++) {
-		o[i] = nullptr;
+		organisms[i] = nullptr;
 	}
 }
 Board::~Board() {
-	delete[] o;
+	delete[] organisms;
 }
 
 bool Board::Validate(Point p) {
@@ -23,8 +25,12 @@ bool Board::Validate(Point p) {
 		return true;
 	}
 }
-int Board::GetIndex(Point p) {
+inline int Board::GetIndex(Point p) {
 	return p.y * row + p.x;
+}
+
+inline Organism* Board::GetAt(Point p) {
+	return organisms[GetIndex(p)];
 }
 
 void Board::SetAt(Organism* organism) {
@@ -32,23 +38,38 @@ void Board::SetAt(Organism* organism) {
 
 	int random;
 
-	while (o[(random = rand() % max)] != nullptr) {
+	while (organisms[(random = Utilities::random(0, max))] != nullptr) {
 		;
 	}
 
-	o[random] = organism;
+	organisms[random] = organism;
 }
 Organism* Board::SetAt(Point p, Organism* organism) {
 	if (Validate(p) == false) {
 		return nullptr;
 	}
 
-	int index = GetIndex(p);
-	if (o[index] == nullptr) {
-		o[index] = organism;
-		return nullptr;
+	Organism* o = GetAt(p);
+	if (o == nullptr) {
+		organisms[GetIndex(p)] = organism;
 	}
-	else {
-		return o[index];
+	
+	return o;
+}
+
+void Board::Draw() {
+	for (int i = 0; i < row*col; i++) {
+
+		if (i % row == 0)
+			std::cout << std::endl;
+
+		Organism* organism = organisms[i];
+
+		if (organism == nullptr) {
+			std::cout << " ";
+		}
+		else {
+			organism->Draw();
+		}
 	}
 }

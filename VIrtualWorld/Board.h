@@ -1,18 +1,23 @@
 #pragma once
-#include "Organism.h"
+#include "Navigation.h"
+class Organism;
 
 class Board {
 	public :
 		Board(int r, int c);
 		~Board();
 
+		bool Validate(Point p);
+
 		void SetAt(Organism* organism);
 		Organism* SetAt(Point p, Organism* organism);
+		Organism* GetAt(Point p);
+
+		void Draw();
 	private :
 		int row;
 		int col;
-		Organism** o;
+		Organism** organisms;
 
-		bool Validate(Point p);
 		int GetIndex(Point p);
 };
