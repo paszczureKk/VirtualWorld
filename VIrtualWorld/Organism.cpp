@@ -2,7 +2,7 @@
 #include <iostream>
 #include "World.h"
 
-Organism::Organism(int s, int i, int a, Point l) {
+Organism::Organism(int s, int i, int a, Point l, World* w) {
 	strength = s;
 	initiative = i;
 	age = a;

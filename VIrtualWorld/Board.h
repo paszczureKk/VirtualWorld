@@ -1,5 +1,6 @@
 #pragma once
-#include "Organism.h"
+#include "Navigation.h"
+class Organism;
 
 class Board {
 	public :
@@ -10,12 +11,13 @@ class Board {
 
 		void SetAt(Organism* organism);
 		Organism* SetAt(Point p, Organism* organism);
+		Organism* GetAt(Point p);
 
 		void Draw();
 	private :
 		int row;
 		int col;
-		Organism** o;
+		Organism** organisms;
 
 		int GetIndex(Point p);
 };

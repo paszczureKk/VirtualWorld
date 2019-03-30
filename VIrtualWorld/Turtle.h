@@ -4,6 +4,6 @@
 
 class Turtle : Animal {
 	public:
-		Turtle(int a, Point p);
+		Turtle(int a, Point p, World* w);
 	private:
 };

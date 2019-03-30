@@ -4,6 +4,6 @@
 
 class Antelope : Animal {
 	public:
-		Antelope(int a, Point p);
+		Antelope(int a, Point p, World* w);
 	private:
 };

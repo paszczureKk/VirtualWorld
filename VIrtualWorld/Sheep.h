@@ -4,6 +4,6 @@
 
 class Sheep : Animal {
 	public:
-		Sheep(int a, Point p);
+		Sheep(int a, Point p, World* w);
 	private:
 };

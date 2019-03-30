@@ -4,6 +4,6 @@
 
 class Dandelion : Plant {
 	public:
-		Dandelion(int a, Point p);
+		Dandelion(int a, Point p, World* w);
 	private:
 };

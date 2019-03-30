@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Navigation.h"
+class World;
 
 class Organism {
 	public :
-		Organism(int s, int i, int a, Point l);
+		Organism(int s, int i, int a, Point l, World* w);
 
 		virtual void Action() = 0;
 		virtual void Collision() = 0;
@@ -16,5 +17,6 @@ class Organism {
 		int initiative;
 		int age;
 		Point location;
+		World* world;
 	private :
 };

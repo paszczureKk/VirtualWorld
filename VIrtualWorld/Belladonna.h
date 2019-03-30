@@ -4,6 +4,6 @@
 
 class Belladonna : Plant {
 	public:
-		Belladonna(int a, Point p);
+		Belladonna(int a, Point p, World* w);
 	private:
 };

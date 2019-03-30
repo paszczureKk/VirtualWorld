@@ -1,8 +1,8 @@
 #pragma once
 
 #include <list>
-#include "Organism.h"
-#include "Board.h"
+class Organism;
+class Board;
 
 class World {
 	public :

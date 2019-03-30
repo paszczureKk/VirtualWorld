@@ -4,6 +4,6 @@
 
 class CyberSheep : Animal {
 	public:
-		CyberSheep(int a, Point p);
+		CyberSheep(int a, Point p, World* w);
 	private:
 };

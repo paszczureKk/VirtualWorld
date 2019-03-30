@@ -114,6 +114,9 @@
     <ClCompile Include="Board.cpp">
       <Filter>Pliki źródłowe\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Pliki źródłowe\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Antelope.h">
@@ -170,7 +173,7 @@
     <ClInclude Include="Board.h">
       <Filter>Pliki nagłówkowe\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Headers.h">
+    <ClInclude Include="Utilities.h">
       <Filter>Pliki nagłówkowe\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
