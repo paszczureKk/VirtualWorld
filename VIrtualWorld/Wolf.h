@@ -4,6 +4,6 @@
 
 class Wolf : Animal {
 	public :
-		Wolf(int a, Point p, World& w);
+		Wolf(int a, Point p);
 	private :
 };

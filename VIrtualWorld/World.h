@@ -12,8 +12,9 @@ class World {
 		
 		void NextTurn();
 	private:
-		std::list<Organism*> organisms;
 		int organismsC;
+
+		std::list<Organism*> organisms;
 		Board* board;
 
 		void Draw();

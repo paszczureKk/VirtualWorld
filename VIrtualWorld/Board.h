@@ -6,13 +6,16 @@ class Board {
 		Board(int r, int c);
 		~Board();
 
+		bool Validate(Point p);
+
 		void SetAt(Organism* organism);
 		Organism* SetAt(Point p, Organism* organism);
+
+		void Draw();
 	private :
 		int row;
 		int col;
 		Organism** o;
 
-		bool Validate(Point p);
 		int GetIndex(Point p);
 };

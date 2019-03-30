@@ -2,12 +2,11 @@
 #include <iostream>
 #include "World.h"
 
-Organism::Organism(int s, int i, int a, Point l, World& w) {
+Organism::Organism(int s, int i, int a, Point l) {
 	strength = s;
 	initiative = i;
 	age = a;
 	location = l;
-	world = &w;
 }
 
 bool Organism::Compare(Organism* current, Organism* other) {

@@ -1,5 +1,6 @@
 #include "Board.h"
-#include <cstdlib>
+#include "Utilities.h"
+#include <iostream>
 
 Board::Board(int r, int c) {
 	row = r;
@@ -32,7 +33,7 @@ void Board::SetAt(Organism* organism) {
 
 	int random;
 
-	while (o[(random = rand() % max)] != nullptr) {
+	while (o[(random = Utilities::random(0, max))] != nullptr) {
 		;
 	}
 
@@ -50,5 +51,22 @@ Organism* Board::SetAt(Point p, Organism* organism) {
 	}
 	else {
 		return o[index];
+	}
+}
+
+void Board::Draw() {
+	for (int i = 0; i < row*col; i++) {
+
+		if (i % row == 0)
+			std::cout << std::endl;
+
+		Organism* organism = o[i];
+
+		if (organism == nullptr) {
+			std::cout << " ";
+		}
+		else {
+			organism->Draw();
+		}
 	}
 }

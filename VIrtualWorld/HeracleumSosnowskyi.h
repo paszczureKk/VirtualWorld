@@ -4,6 +4,6 @@
 
 class HeracleumSosnowskyi : Plant {
 	public:
-		HeracleumSosnowskyi(int a, Point p, World& w);
+		HeracleumSosnowskyi(int a, Point p);
 	private:
 };

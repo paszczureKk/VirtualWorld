@@ -4,6 +4,6 @@
 
 class Human : Animal {
 	public:
-		Human(int a, Point p, World& w);
+		Human(int a, Point p);
 	private:
 };
