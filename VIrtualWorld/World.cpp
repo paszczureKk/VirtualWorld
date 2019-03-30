@@ -15,6 +15,14 @@ World::~World() {
 	delete board;
 }
 
+bool World::PointValidate(Point p) {
+	return board->Validate(p);
+}
+
+Organism* World::MoveTo(Point p, Organism* o) {
+	return board->SetAt(p, o);
+}
+
 void World::NextTurn() {
 	organisms.sort(Organism::Compare);
 

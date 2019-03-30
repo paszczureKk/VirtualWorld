@@ -25,6 +25,7 @@
 #include "HeracleumSosnowskyi.h"
 
 int main() {
+	
 	/*std::list<Organism*> organisms;
 
 	Point p = Point();

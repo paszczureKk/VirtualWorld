@@ -11,6 +11,8 @@ class World {
 		~World();
 		
 		void NextTurn();
+		bool PointValidate(Point p);
+		Organism* MoveTo(Point p, Organism* o);
 	private:
 		int organismsC;
 
