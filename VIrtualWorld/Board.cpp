@@ -1,6 +1,5 @@
-#include "Board.h"
+#include "World.h"
 #include "Utilities.h"
-#include "Organism.h"
 #include <iostream>
 
 Board::Board(int r, int c) {
@@ -28,33 +27,107 @@ bool Board::Validate(Point p) {
 inline int Board::GetIndex(Point p) {
 	return p.y * row + p.x;
 }
+int Board::GetRow() {
+	return row;
+}
+int Board::GetCol() {
+	return col;
+}
 
 inline Organism* Board::GetAt(Point p) {
 	return organisms[GetIndex(p)];
 }
 
-void Board::SetAt(Organism* organism) {
-	int max = row * col;
+Point Board::SeekForFree(Point p) {
 
-	int random;
+	seekBuffer.clear();
 
-	while (organisms[(random = Utilities::random(0, max))] != nullptr) {
-		;
+	int x = (p.x - 1 < 0) ? 0 : p.x - 1;
+	int y = (p.y - 1 < 0) ? 0 : p.y - 1;
+
+	int xMax = (p.x + 1 == row) ? p.x : p.x + 1;
+	int yMax = (p.y + 1 == col) ? p.y : p.y + 1;
+
+	Point temp;
+
+	for (; x <= xMax; x++) {
+		for (; y <= yMax; y++) {
+			if (x == y) {
+				continue;
+			}
+
+			temp.x = x;
+			temp.y = y;
+
+			if (organisms[GetIndex(temp)] == nullptr) {
+				seekBuffer.push_back(temp);
+			}
+		}
 	}
 
-	organisms[random] = organism;
+	if (seekBuffer.size() == 0) {
+		return NULL_POINT;
+	}
+
+	return seekBuffer[Utilities::random(0, seekBuffer.size())];
+}
+
+void Board::SetAt(Organism* o) {
+	
+	seekBuffer.clear();
+
+	Point temp;
+
+	for (int x = 0; x < row; x++) {
+		for (int y = 0; y < col; y++) {
+
+			temp.x = x;
+			temp.y = y;
+
+			if (organisms[GetIndex(temp)] == nullptr) {
+				seekBuffer.push_back(temp);
+			}
+		}
+	}
+
+	if (seekBuffer.size() == 0) {
+		return;
+	}
+
+	if(!(o->GetLocation() == NULL_POINT)) {
+		organisms[GetIndex(o->GetLocation())] = nullptr;
+	}
+
+	temp = seekBuffer[Utilities::random(0, seekBuffer.size())];
+	o->SetLocation(temp);
+	organisms[GetIndex(temp)] = o;
 }
 Organism* Board::SetAt(Point p, Organism* organism) {
+
 	if (Validate(p) == false) {
 		return nullptr;
 	}
 
 	Organism* o = GetAt(p);
 	if (o == nullptr) {
+		if (!(organism->GetLocation() == NULL_POINT)) {
+			organisms[GetIndex(organism->GetLocation())] = nullptr;
+		}
+		organism->SetLocation(p);
 		organisms[GetIndex(p)] = organism;
 	}
 	
 	return o;
+}
+void Board::KillAt(Point p) {
+	Organism* o = organisms[GetIndex(p)];
+
+	if (o == nullptr) {
+		return;
+	}
+
+	delete o;
+	organisms[GetIndex(p)] = nullptr;
 }
 
 void Board::Draw() {

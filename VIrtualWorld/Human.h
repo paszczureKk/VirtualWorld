@@ -2,8 +2,13 @@
 
 #include "Animal.h"
 
-class Human : Animal {
+class Human : Animal<Human> {
 	public:
-		Human(int a, Point p, World* w);
+		Human(int a, World* w);
+		void Action() override;
+		bool Collision(Organism* o) override;
+		std::string ToString() override;
+		bool IsAlive();
 	private:
+		bool alive;
 };

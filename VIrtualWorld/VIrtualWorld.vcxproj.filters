@@ -60,13 +60,7 @@
     <ClCompile Include="Main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Plant.cpp">
-      <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
-    </ClCompile>
     <ClCompile Include="Organism.cpp">
-      <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
-    </ClCompile>
-    <ClCompile Include="Animal.cpp">
       <Filter>Pliki źródłowe\Organisms\Abstract</Filter>
     </ClCompile>
     <ClCompile Include="Navigation.cpp">
@@ -140,9 +134,6 @@
     <ClInclude Include="Plant.h">
       <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
     </ClInclude>
-    <ClInclude Include="Organism.h">
-      <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
-    </ClInclude>
     <ClInclude Include="Animal.h">
       <Filter>Pliki nagłówkowe\Organisms\Abstract</Filter>
     </ClInclude>
@@ -170,10 +161,10 @@
     <ClInclude Include="Navigation.h">
       <Filter>Pliki nagłówkowe\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Pliki nagłówkowe\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Utilities.h">
+      <Filter>Pliki nagłówkowe\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="OrganismsHeaders.h">
       <Filter>Pliki nagłówkowe\Utilities</Filter>
     </ClInclude>
   </ItemGroup>

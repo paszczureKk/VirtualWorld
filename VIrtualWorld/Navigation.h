@@ -11,29 +11,13 @@ enum WorldDirections {
 struct Point {
 	int x;
 	int y;
+
+	bool operator==(Point other) {
+		return (this->x == other.x && this->y == other.y);
+	}
 };
+const struct Point NULL_POINT = { -1, -1 };
 
 namespace Navigation {
-	Point Translate(Point p) {
-		int dir = Utilities::random(0, DIRECTIONS_COUNT);
-
-		Point point = { p.x, p.y };
-
-		switch (dir) {
-			case NORTH:
-				point.x++;
-				break;
-			case EAST:
-				point.y++;
-				break;
-			case SOUTH:
-				point.x--;
-				break;
-			case WEST:
-				point.y--;
-				break;
-		}
-
-		return point;
-	}
+	Point Translate(Point p);
 }

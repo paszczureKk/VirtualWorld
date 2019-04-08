@@ -2,8 +2,10 @@
 
 #include "Animal.h"
 
-class Fox : Animal {
+class Fox : Animal<Fox> {
 	public:
-		Fox(int a, Point p, World* w);
+		Fox(int a, World* w);
+		void Action() override;
+		std::string ToString() override;
 	private:
 };

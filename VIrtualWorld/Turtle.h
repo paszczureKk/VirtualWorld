@@ -2,8 +2,11 @@
 
 #include "Animal.h"
 
-class Turtle : Animal {
+class Turtle : Animal<Turtle> {
 	public:
-		Turtle(int a, Point p, World* w);
+		Turtle(int a, World* w);
+		void Action() override;
+		bool Collision(Organism* o) override;
+		std::string ToString() override;
 	private:
 };

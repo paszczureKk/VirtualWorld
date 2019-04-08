@@ -2,8 +2,11 @@
 
 #include "Animal.h"
 
-class CyberSheep : Animal {
+class CyberSheep : Animal<CyberSheep> {
 	public:
-		CyberSheep(int a, Point p, World* w);
+		CyberSheep(int a, World* w);
+		void Action() override;
+		bool Collision(Organism* o) override;
+		std::string ToString() override;
 	private:
 };

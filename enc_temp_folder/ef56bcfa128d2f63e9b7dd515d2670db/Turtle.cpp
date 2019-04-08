@@ -13,7 +13,7 @@ void Turtle::Action() {
 
 bool Turtle::Collision(Organism* o) {
 	if (TypeCheck(o) == false) {
-		if (o->GetStrength() < 5) {
+		if (0.5f < Utilities::random(0.0f, 1.0f)) {
 			return false;
 		}
 	}

@@ -2,8 +2,11 @@
 
 #include "Plant.h"
 
-class HeracleumSosnowskyi : Plant {
+class HeracleumSosnowskyi : Plant<HeracleumSosnowskyi> {
 	public:
-		HeracleumSosnowskyi(int a, Point p, World* w);
+		HeracleumSosnowskyi(int a, World* w);
+		void Action() override;
+		bool Collision(Organism* o) override;
+		std::string ToString() override;
 	private:
 };

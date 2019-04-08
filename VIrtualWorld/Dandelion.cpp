@@ -1,3 +1,13 @@
 #include "Dandelion.h"
 
-Dandelion::Dandelion(int a, Point p, World* w) : Plant(0, a, p, w) {}
+Dandelion::Dandelion(int a, World* w) : Plant(0, a, 'M', w) {}
+
+void Dandelion::Action() {
+	for (int i = 0; i < 3; i++) {
+		Plant::Action();
+	}
+}
+
+std::string Dandelion::ToString() {
+	return "Dandelion";
+}

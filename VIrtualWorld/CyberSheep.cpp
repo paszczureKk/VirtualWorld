@@ -1,3 +1,22 @@
 #include "CyberSheep.h"
+#include "HeracleumSosnowskyi.h"
 
-CyberSheep::CyberSheep(int a, Point p, World* w) : Animal(11, 4, a, p, w) {}
+CyberSheep::CyberSheep(int a, World* w) : Animal(11, 4, a, 'C', w) {}
+
+//TO DO
+void CyberSheep::Action() {
+	Animal::Action();
+}
+
+bool CyberSheep::Collision(Organism* o) {
+	if (typeid(o).name() == typeid(HeracleumSosnowskyi).name()) {
+		o->Kill(this->ToString());
+		return false;
+	}
+
+	return Animal::Collision(o);
+}
+
+std::string CyberSheep::ToString() {
+	return "CyberSheep";
+}

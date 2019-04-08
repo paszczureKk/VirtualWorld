@@ -2,8 +2,9 @@
 
 #include "Plant.h"
 
-class Grass : Plant {
+class Grass : Plant<Grass> {
 	public:
-		Grass(int a, Point p, World* w);
+		Grass(int a, World* w);
+		std::string ToString() override;
 	private:
 };

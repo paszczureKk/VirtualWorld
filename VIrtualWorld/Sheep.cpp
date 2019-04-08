@@ -1,3 +1,7 @@
 #include "Sheep.h"
 
-Sheep::Sheep(int a, Point p, World* w) : Animal(4, 4, a, p, w) {}
+Sheep::Sheep(int a, World* w) : Animal(4, 4, a, 'S', w) {}
+
+std::string Sheep::ToString() {
+	return "Sheep";
+}

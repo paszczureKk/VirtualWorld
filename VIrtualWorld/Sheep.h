@@ -2,8 +2,9 @@
 
 #include "Animal.h"
 
-class Sheep : Animal {
+class Sheep : Animal<Sheep> {
 	public:
-		Sheep(int a, Point p, World* w);
+		Sheep(int a, World* w);
+		std::string ToString() override;
 	private:
 };
