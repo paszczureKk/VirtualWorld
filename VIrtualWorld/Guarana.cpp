@@ -1,4 +1,5 @@
 #include "Guarana.h"
+#include <string>
 
 Guarana::Guarana(int a, World* w) : Plant(0, a, 'G', w) {}
 

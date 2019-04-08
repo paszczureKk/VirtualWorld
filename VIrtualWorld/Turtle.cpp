@@ -1,5 +1,6 @@
 #include "Turtle.h"
 #include "Utilities.h"
+#include <string>
 
 Turtle::Turtle(int a, World* w) : Animal(2, 1, a, 'Z', w) {}
 

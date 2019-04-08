@@ -11,8 +11,8 @@ World::World(int rows, int cols, int oc) {
 
 	board = new Board(rows, cols);
 
-	player = new Human(GetAge(), this);
-	AddToWorld((Organism*)player);
+	player = (Organism*)new Human(GetAge(), this);
+	AddToWorld(player);
 
 	Populate(oc);
 }
@@ -20,7 +20,7 @@ World::~World() {
 	delete board;
 }
 
-void World::AddToWorld(Organism* o) {
+void World::AddToWorld(Organism* o, Point p) {
 	born.push_back(o);
 
 	if (o->GetLocation() == NULL_POINT) {
@@ -31,11 +31,12 @@ void World::AddToWorld(Organism* o) {
 	}
 }
 void World::RemoveFromWorld(Organism* o) {
+	board->KillAt(o->GetLocation());
 	dead.push_back(o);
 }
 void World::RemoveFromWorld(std::string s, Point p, bool(*ToKill)(Organism* o)) {
 	int x = (p.x - 1 < 0) ? 0 : p.x - 1;
-	int y = (p.y - 1 < 0) ? 0 : p.y - 1;
+	int yB = (p.y - 1 < 0) ? 0 : p.y - 1;
 
 	int xMax = (p.x + 1 == board->GetRow()) ? p.x : p.x + 1;
 	int yMax = (p.y + 1 == board->GetCol()) ? p.y : p.y + 1;
@@ -43,8 +44,8 @@ void World::RemoveFromWorld(std::string s, Point p, bool(*ToKill)(Organism* o)) 
 	Point temp;
 
 	for (; x <= xMax; x++) {
-		for (; y <= yMax; y++) {
-			if (x == y) {
+		for (int y = yB; y <= yMax; y++) {
+			if (x == p.x && y == p.y) {
 				continue;
 			}
 
@@ -100,14 +101,16 @@ void World::NextTurn() {
 	std::cout << std::endl;
 
 	for (Organism* o : organisms) {
-		o->Action();
-
-		if (dead.size() != 0) {
-			for (Organism* o : dead) {
-				board->KillAt(o->GetLocation());
-			}
-			dead.clear();
+		if (o->IsAlive() == true) {
+			o->Action();
 		}
+	}
+
+	if (dead.size() != 0) {
+		for (Organism* o : dead) {
+			organisms.remove(o);
+		}
+		dead.clear();
 	}
 
 	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
@@ -178,5 +181,5 @@ void World::Start() {
 }
 //TO DO
 void World::Notify(std::string s) {
-	printf_s("%s", s);
+	std::cout << s << std::endl;
 }

@@ -1,4 +1,5 @@
 #include "Dandelion.h"
+#include <string>
 
 Dandelion::Dandelion(int a, World* w) : Plant(0, a, 'M', w) {}
 

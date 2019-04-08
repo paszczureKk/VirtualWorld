@@ -27,7 +27,7 @@ class Animal : public Organism {
 				}
 
 				Organism* org = (Organism*)(new T(world->GetAge(), world));
-				world->AddToWorld(org);
+				world->AddToWorld(org, p);
 
 				return false;
 			}

@@ -1,5 +1,6 @@
 #include "CyberSheep.h"
 #include "HeracleumSosnowskyi.h"
+#include <string>
 
 CyberSheep::CyberSheep(int a, World* w) : Animal(11, 4, a, 'C', w) {}
 

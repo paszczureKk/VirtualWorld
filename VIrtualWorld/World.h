@@ -5,7 +5,6 @@
 #include "Navigation.h"
 
 class Board;
-class Human;
 class Organism;
 
 class World {
@@ -18,7 +17,7 @@ class World {
 		void Start();
 		void Notify(std::string s);
 
-		void AddToWorld(Organism* o);
+		void AddToWorld(Organism* o, Point p = NULL_POINT);
 		void RemoveFromWorld(Organism* o);
 		void RemoveFromWorld(std::string s, Point p, bool(*ToKill)(Organism* o));
 		
@@ -28,7 +27,7 @@ class World {
 		Organism* MoveTo(Point p, Organism* o);
 	private:
 		int organismsC;
-		Human* player;
+		Organism* player;
 
 		std::list<Organism*> organisms;
 		std::list<Organism*> born;
@@ -59,6 +58,7 @@ public:
 	void SetLocation(Point p);
 	int GetStrength();
 	virtual bool IsAnimal() = 0;
+	bool IsAlive();
 
 	static bool Compare(Organism* current, Organism* other);
 protected:
@@ -68,6 +68,7 @@ protected:
 	Point location;
 	World* world;
 	char image;
+	bool alive;
 
 	void Fight(Organism* o);
 private:

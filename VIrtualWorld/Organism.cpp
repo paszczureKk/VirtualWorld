@@ -1,5 +1,6 @@
 #include <iostream>
 #include "World.h"
+#include <string>
 
 Organism::Organism(int s, int i, int a, char ch, World* w) {
 	strength = s;
@@ -8,6 +9,11 @@ Organism::Organism(int s, int i, int a, char ch, World* w) {
 	location = NULL_POINT;
 	image = ch;
 	world = w;
+	alive = true;
+}
+
+bool Organism::IsAlive() {
+	return alive;
 }
 
 int Organism::GetStrength() {
@@ -35,6 +41,7 @@ void Organism::Draw() {
 }
 
 void Organism::Kill(std::string s) {
+	alive = false;
 	world->Notify(s);
 	world->RemoveFromWorld(this);
 }

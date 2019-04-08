@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Animal.h"
+#include <string>
 
 class Antelope : Animal<Antelope> {
 	public:
@@ -9,4 +10,5 @@ class Antelope : Animal<Antelope> {
 		bool Collision(Organism* o) override;
 		std::string ToString() override;
 	private:
+
 };

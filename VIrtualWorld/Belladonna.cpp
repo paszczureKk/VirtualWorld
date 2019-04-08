@@ -1,4 +1,5 @@
 #include "Belladonna.h"
+#include <string>
 
 Belladonna::Belladonna(int a, World* w) : Plant(99, a, 'J', w) {}
 

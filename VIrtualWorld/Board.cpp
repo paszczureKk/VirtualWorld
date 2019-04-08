@@ -43,7 +43,7 @@ Point Board::SeekForFree(Point p) {
 	seekBuffer.clear();
 
 	int x = (p.x - 1 < 0) ? 0 : p.x - 1;
-	int y = (p.y - 1 < 0) ? 0 : p.y - 1;
+	int yB = (p.y - 1 < 0) ? 0 : p.y - 1;
 
 	int xMax = (p.x + 1 == row) ? p.x : p.x + 1;
 	int yMax = (p.y + 1 == col) ? p.y : p.y + 1;
@@ -51,8 +51,8 @@ Point Board::SeekForFree(Point p) {
 	Point temp;
 
 	for (; x <= xMax; x++) {
-		for (; y <= yMax; y++) {
-			if (x == y) {
+		for (int y = yB; y <= yMax; y++) {
+			if (x == p.x && y == p.y) {
 				continue;
 			}
 
@@ -126,7 +126,6 @@ void Board::KillAt(Point p) {
 		return;
 	}
 
-	delete o;
 	organisms[GetIndex(p)] = nullptr;
 }
 

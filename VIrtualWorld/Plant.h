@@ -1,6 +1,8 @@
 #pragma once
 
 #include "World.h"
+#include <string>
+#include <iostream>
 
 template <typename T>
 class Plant : public Organism {
@@ -15,7 +17,8 @@ class Plant : public Organism {
 			}
 
 			Organism* org = (Organism*)(new T(world->GetAge(), world));
-			world->AddToWorld(org);
+			std::cout << this->ToString() + " planted on " + p.ToString() << std::endl;
+			world->AddToWorld(org, p);
 		}
 		bool virtual Collision(Organism* o) override {
 			this->Kill(o->ToString());

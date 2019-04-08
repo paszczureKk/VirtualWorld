@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Animal.h"
+#include <string>
 
 class Wolf : Animal<Wolf> {
 	public :

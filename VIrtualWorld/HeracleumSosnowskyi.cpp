@@ -1,5 +1,6 @@
 #include "HeracleumSosnowskyi.h"
 #include "CyberSheep.h"
+#include <string>
 
 HeracleumSosnowskyi::HeracleumSosnowskyi(int a, World* w) : Plant(10, a, 'B', w) {}
 

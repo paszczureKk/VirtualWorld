@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 enum WorldDirections {
 	NORTH,
 	EAST,
@@ -14,6 +16,15 @@ struct Point {
 
 	bool operator==(Point other) {
 		return (this->x == other.x && this->y == other.y);
+	}
+	std::string ToString() {
+		std::string a;
+		a += "(";
+		a += x;
+		a += ",";
+		a += y;
+		a += ")";
+		return a;
 	}
 };
 const struct Point NULL_POINT = { -1, -1 };

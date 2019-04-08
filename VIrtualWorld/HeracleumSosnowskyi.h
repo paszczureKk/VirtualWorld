@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Plant.h"
+#include <string>
 
 class HeracleumSosnowskyi : Plant<HeracleumSosnowskyi> {
 	public:

@@ -1,5 +1,6 @@
 #include "Fox.h"
 #include "Navigation.h"
+#include <string>
 
 Fox::Fox(int a, World* w) : Animal(3, 7, a, 'F', w) {}
 
