@@ -1,6 +1,8 @@
-#include <iostream>
 #include "World.h"
+
 #include <string>
+
+#include "conio2.h"
 
 Organism::Organism(int s, int i, int a, char ch, World* w) {
 	strength = s;
@@ -37,7 +39,7 @@ bool Organism::Compare(Organism* current, Organism* other) {
 }
 
 void Organism::Draw() {
-	std::cout << image;
+	putch(image);
 }
 
 void Organism::Kill(std::string s) {

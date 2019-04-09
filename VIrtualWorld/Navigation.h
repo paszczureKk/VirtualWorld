@@ -1,13 +1,15 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 
 enum WorldDirections {
 	NORTH,
 	EAST,
 	SOUTH,
 	WEST,
-	DIRECTIONS_COUNT
+	DIRECTIONS_COUNT,
+	DIR_NULL
 };
 
 struct Point {
@@ -18,17 +20,15 @@ struct Point {
 		return (this->x == other.x && this->y == other.y);
 	}
 	std::string ToString() {
-		std::string a;
-		a += "(";
-		a += x;
-		a += ",";
-		a += y;
-		a += ")";
-		return a;
+		std::stringstream ss;
+
+		ss << '(' << x << ',' << y << ')';
+
+		return ss.str();
 	}
 };
 const struct Point NULL_POINT = { -1, -1 };
 
 namespace Navigation {
-	Point Translate(Point p);
+	Point Translate(Point p, WorldDirections = DIR_NULL);
 }

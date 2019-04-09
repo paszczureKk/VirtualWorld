@@ -1,16 +1,21 @@
 #include "World.h"
 #include "Utilities.h"
-#include <iostream>
 
-Board::Board(int r, int c) {
+#include "conio2.h"
+#include "Layout.h"
+
+Board::Board(int r, int c, World* w) {
 	row = r;
 	col = c;
+	world = w;
 
 	organisms = new Organism*[ r*c ];
 
 	for (int i = 0; i < row*col; i++) {
 		organisms[i] = nullptr;
 	}
+
+	DrawOutline();
 }
 Board::~Board() {
 	delete[] organisms;
@@ -130,18 +135,64 @@ void Board::KillAt(Point p) {
 }
 
 void Board::Draw() {
-	for (int i = 0; i < row*col; i++) {
 
-		if (i % row == 0)
-			std::cout << std::endl;
+	textbackground(BLACK);
+	textcolor(WHITE);
+
+	for (int i = 0; i < row; i++) {
+
+		gotoxy(world->GetLayout()->GetBoardX(), world->GetLayout()->GetBoardY() + i);
+
+		for (int j = 0; j < col; j++) {
+
+			Organism* organism = organisms[i*row + j];
+
+			if (organism == nullptr) {
+				putch(' ');
+			}
+			else {
+				organism->Draw();
+			}
+		}
+	}
+
+	/*for (int i = 0; i < row*col; i++) {
+
+		if (i % row == 0) {
+			gotoxy(BOARD_X_ORIGIN)
+		}
 
 		Organism* organism = organisms[i];
 
 		if (organism == nullptr) {
-			std::cout << " ";
+			putch(' ');
 		}
 		else {
 			organism->Draw();
 		}
+	}*/
+
+}
+
+void Board::DrawOutline() {
+
+	gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() - 1);
+
+	textbackground(WHITE);
+
+	for (int i = 0; i < col+2; i++) {
+		putch(' ');
+	}
+	for (int i = 0; i < row; i++) {
+		gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() + i);
+		putch(' ');
+		gotoxy(world->GetLayout()->GetBoardX() + col, world->GetLayout()->GetBoardY() + i);
+		putch(' ');
+	}
+
+	gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() + row);
+
+	for (int i = 0; i < col + 2; i++) {
+		putch(' ');
 	}
 }

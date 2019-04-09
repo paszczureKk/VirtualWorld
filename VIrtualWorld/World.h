@@ -3,6 +3,7 @@
 #include <list>
 #include <vector>
 #include "Navigation.h"
+#include "Layout.h"
 
 class Board;
 class Organism;
@@ -11,6 +12,8 @@ class World {
 	public :
 		World(int rows, int cols, int oc = 2);
 		~World();
+
+		void LayoutInit(int r, int c);
 
 		int GetAge();
 
@@ -25,7 +28,14 @@ class World {
 		Point SeekForFree(Point p);
 		Organism* GetAt(Point p);
 		Organism* MoveTo(Point p, Organism* o);
+
+		WorldDirections GetInput(WorldDirections direction, Point p);
+		void Draw();
+
+		Layout* GetLayout();
+
 	private:
+
 		int organismsC;
 		Organism* player;
 
@@ -34,11 +44,13 @@ class World {
 		std::list<Organism*> dead;
 		Board* board;
 
+		Layout* layout;
+
 		void Populate(int n);
 
-		void GetInput();
 		void NextTurn();
-		void Draw();
+
+		void ClearLegend();
 };
 
 class Organism {
@@ -76,7 +88,7 @@ private:
 
 class Board {
 public:
-	Board(int r, int c);
+	Board(int r, int c, World* w);
 	~Board();
 
 	int GetRow();
@@ -91,10 +103,13 @@ public:
 	Organism* GetAt(Point p);
 
 	void Draw();
+	void DrawOutline();
 private:
 	int row;
 	int col;
 	Organism** organisms;
+
+	World* world;
 
 	std::vector<Point> seekBuffer;
 

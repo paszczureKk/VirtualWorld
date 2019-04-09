@@ -19,7 +19,7 @@ bool Antelope::Collision(Organism* o) {
 		Point p = location;
 		Move(newP);
 
-		o->Move(p);
+		this->Move(p);
 
 		return false;
 	}

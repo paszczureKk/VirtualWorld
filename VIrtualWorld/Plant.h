@@ -1,15 +1,24 @@
 #pragma once
 
 #include "World.h"
+#include "Utilities.h"
+
 #include <string>
 #include <iostream>
 
 template <typename T>
 class Plant : public Organism {
 	public:
-		Plant(int s, int a, char ch, World* w) : Organism(s, 0, a, ch, w) {}
+		Plant(int s, int a, char ch, World* w, float p) : Organism(s, 0, a, ch, w) {
+			probability = p;
+		}
 
 		void virtual Action() override {
+
+			if (probability < Utilities::random(0.0f, 1.0f)) {
+				return;
+			}
+
 			Point p = world->SeekForFree(location);
 
 			if (p == NULL_POINT) {
@@ -17,11 +26,14 @@ class Plant : public Organism {
 			}
 
 			Organism* org = (Organism*)(new T(world->GetAge(), world));
-			std::cout << this->ToString() + " planted on " + p.ToString() << std::endl;
 			world->AddToWorld(org, p);
+
+			world->Notify(this->ToString() + " has grown on " + p.ToString());
 		}
 		bool virtual Collision(Organism* o) override {
 			this->Kill(o->ToString());
+
+			o->Move(this->GetLocation());
 
 			return false;
 		}
@@ -34,4 +46,5 @@ class Plant : public Organism {
 			return false;
 		}
 	private:
+		float probability;
 };

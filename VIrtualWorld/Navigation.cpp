@@ -2,8 +2,10 @@
 #include "Utilities.h"
 
 namespace Navigation {
-	Point Translate(Point p) {
-		int dir = Utilities::random(0, DIRECTIONS_COUNT);
+	Point Translate(Point p, WorldDirections dir) {
+		if (dir == DIR_NULL) {
+			dir = (WorldDirections)Utilities::random(0, DIRECTIONS_COUNT);
+		}
 
 		Point point = { p.x, p.y };
 

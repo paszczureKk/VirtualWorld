@@ -2,7 +2,7 @@
 #include "CyberSheep.h"
 #include <string>
 
-HeracleumSosnowskyi::HeracleumSosnowskyi(int a, World* w) : Plant(10, a, 'B', w) {}
+HeracleumSosnowskyi::HeracleumSosnowskyi(int a, World* w) : Plant(10, a, 'H', w, 0.01f) {}
 
 void HeracleumSosnowskyi::Action() {
 	world->RemoveFromWorld(this->ToString(), location, 

@@ -111,6 +111,12 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>Pliki źródłowe\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="conio2.cpp">
+      <Filter>Pliki źródłowe\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Layout.cpp">
+      <Filter>Pliki źródłowe\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Antelope.h">
@@ -166,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="OrganismsHeaders.h">
       <Filter>Pliki nagłówkowe\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="conio2.h">
+      <Filter>Pliki nagłówkowe\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>Pliki nagłówkowe\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

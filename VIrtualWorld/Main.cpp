@@ -7,9 +7,10 @@
 #include "Utilities.h"
 
 int main() {
+
 	Utilities::init();
 	
-	World* world = new World(10, 10);
+	World* world = new World(20, 20);
 
 	world->Start();
 

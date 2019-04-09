@@ -2,7 +2,7 @@
 #include "Utilities.h"
 #include <string>
 
-Turtle::Turtle(int a, World* w) : Animal(2, 1, a, 'Z', w) {}
+Turtle::Turtle(int a, World* w) : Animal(2, 1, a, 'T', w) {}
 
 void Turtle::Action() {
 	if (0.25f < Utilities::random(0.0f, 1.0f)) {

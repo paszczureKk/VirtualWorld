@@ -29,6 +29,8 @@ class Animal : public Organism {
 				Organism* org = (Organism*)(new T(world->GetAge(), world));
 				world->AddToWorld(org, p);
 
+				world->Notify(this->ToString() + " has been born on " + p.ToString());
+
 				return false;
 			}
 
