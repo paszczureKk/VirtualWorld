@@ -1,6 +1,7 @@
 #include "Utilities.h"
 #include <cstdlib>
 #include <time.h>
+#include <string>
 
 #include "conio2.h"
 
@@ -20,12 +21,17 @@ namespace Utilities {
 		// hide the blinking cursor
 		_setcursortype(_NOCURSOR);
 
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 	}
 	float random(float min, float max) {
 		return rand() / (RAND_MAX / (max - min) ) + min;
 	}
 	int random(int min, int max) {
 		return rand() % max + min;
+	}
+	void print(std::string s) {
+		for (int i = 0; s[i] != '\0'; i++) {
+			putch(s[i]);
+		}
 	}
 }

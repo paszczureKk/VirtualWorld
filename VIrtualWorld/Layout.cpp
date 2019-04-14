@@ -15,6 +15,12 @@ void Layout::Init() {
 
 	SetLegendX(30);
 	SetLegendY(5);
+
+	SetLegendWidth(0);
+	SetLegendHeigth(0);
+
+	SetLegendWidth(30);
+	SetLegendHeigth(20);
 }
 
 int Layout::GetBoardX() {
@@ -64,7 +70,7 @@ int Layout::GetOutputHeight() {
 }
 void Layout::SetOutputHeight(int value) {
 	if (value > 0) {
-		output_height++;
+		output_height += value;
 	}
 	else {
 		output_height = 0;
@@ -83,4 +89,29 @@ int Layout::GetLegendY() {
 }
 void Layout::SetLegendY(int value) {
 	LEGEND_Y = value;
+}
+
+int Layout::GetLegendWidth() {
+	return legend_width;
+}
+void Layout::SetLegendWidth(int value) {
+	if (value > 0) {
+		if (legend_width < value) {
+			legend_width = value;
+		}
+	}
+	else {
+		legend_width = 0;
+	}
+}
+int Layout::GetLegendHeight() {
+	return legend_height;
+}
+void Layout::SetLegendHeigth(int value) {
+	if (value > 0) {
+		legend_height += value;
+	}
+	else {
+		legend_height = 0;
+	}
 }

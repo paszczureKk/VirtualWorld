@@ -6,12 +6,16 @@
 #ifndef CONIO2_H
 #define CONIO2_H
 
+#define IS_ARROW_KEY 0
+
 #define KEY_UP 0x48
 #define KEY_DOWN 0x50
 #define KEY_LEFT 0x4b
 #define KEY_RIGHT 0x4d
 #define KEY_ACCEPT 0x0d
 #define KEY_SPECIAL 0x20
+#define KEY_SAVE 0x53
+#define KEY_LOAD 0x4c
 
 #define BLACK		0
 #define BLUE		1

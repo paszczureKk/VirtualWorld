@@ -7,6 +7,7 @@
 
 class Board;
 class Organism;
+class Human;
 
 class World {
 	public :
@@ -16,6 +17,7 @@ class World {
 		void LayoutInit(int r, int c);
 
 		int GetAge();
+		Layout* GetLayout();
 
 		void Start();
 		void Notify(std::string s);
@@ -29,33 +31,45 @@ class World {
 		Organism* GetAt(Point p);
 		Organism* MoveTo(Point p, Organism* o);
 
-		WorldDirections GetInput(WorldDirections direction, Point p);
 		void Draw();
-
-		Layout* GetLayout();
+		void LegendUpdate(WorldDirections dir = DIR_NULL, std::string s = "");
+		WorldDirections GetInput(WorldDirections dir, Point p);
 
 	private:
 
 		int organismsC;
-		Organism* player;
+		Human* player;
 
 		std::list<Organism*> organisms;
 		std::list<Organism*> born;
 		std::list<Organism*> dead;
-		Board* board;
 
+		Board* board;
 		Layout* layout;
 
 		void Populate(int n);
 
 		void NextTurn();
 
+		void DrawOutline(int x, int y, int height, int width);
+		void DrawLegend();
 		void ClearLegend();
+		void ClearOutput();
+
+		void Save();
+		void Load();
 };
 
 class Organism {
 public:
 	Organism(int s, int i, int a, char ch, World* w);
+
+	Point GetLocation();
+	void SetLocation(Point p);
+	int GetStrength();
+
+	virtual bool IsAnimal() = 0;
+	bool IsAlive();
 
 	virtual void Action() = 0;
 	virtual bool Collision(Organism* o) = 0;
@@ -65,12 +79,6 @@ public:
 
 	virtual void Kill(std::string s);
 	void Buff(int value);
-
-	Point GetLocation();
-	void SetLocation(Point p);
-	int GetStrength();
-	virtual bool IsAnimal() = 0;
-	bool IsAlive();
 
 	static bool Compare(Organism* current, Organism* other);
 protected:
@@ -103,7 +111,6 @@ public:
 	Organism* GetAt(Point p);
 
 	void Draw();
-	void DrawOutline();
 private:
 	int row;
 	int col;

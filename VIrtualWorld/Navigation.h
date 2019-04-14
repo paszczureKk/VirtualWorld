@@ -31,4 +31,5 @@ const struct Point NULL_POINT = { -1, -1 };
 
 namespace Navigation {
 	Point Translate(Point p, WorldDirections = DIR_NULL);
+	std::string ToString(WorldDirections dir);
 }

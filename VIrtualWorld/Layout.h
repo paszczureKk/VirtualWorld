@@ -26,6 +26,12 @@ class Layout {
 		int GetLegendY();
 		void SetLegendY(int value);
 
+		int GetLegendWidth();
+		void SetLegendWidth(int value);
+		int GetLegendHeight();
+		void SetLegendHeigth(int value);
+
+
 	private:
 		int BOARD_X;
 		int BOARD_Y;
@@ -37,4 +43,6 @@ class Layout {
 
 		int LEGEND_X;
 		int LEGEND_Y;
+		int legend_width;
+		int legend_height;
 };

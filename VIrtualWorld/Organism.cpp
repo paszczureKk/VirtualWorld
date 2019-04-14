@@ -14,13 +14,6 @@ Organism::Organism(int s, int i, int a, char ch, World* w) {
 	alive = true;
 }
 
-bool Organism::IsAlive() {
-	return alive;
-}
-
-int Organism::GetStrength() {
-	return strength;
-}
 Point Organism::GetLocation() {
 	return location;
 }
@@ -28,14 +21,12 @@ void Organism::SetLocation(Point p) {
 	this->location.x = p.x;
 	this->location.y = p.y;
 }
+int Organism::GetStrength() {
+	return strength;
+}
 
-bool Organism::Compare(Organism* current, Organism* other) {
-	if ( current->initiative != other->initiative ) {
-		return current->initiative > other->initiative;
-	}
-	else {
-		return current->age > other->age;
-	}
+bool Organism::IsAlive() {
+	return alive;
 }
 
 void Organism::Draw() {
@@ -47,9 +38,17 @@ void Organism::Kill(std::string s) {
 	world->Notify(s);
 	world->RemoveFromWorld(this);
 }
-
 void Organism::Buff(int value) {
 	strength += value;
+}
+
+bool Organism::Compare(Organism* current, Organism* other) {
+	if (current->initiative != other->initiative) {
+		return current->initiative > other->initiative;
+	}
+	else {
+		return current->age > other->age;
+	}
 }
 
 void Organism::Fight(Organism* o) {

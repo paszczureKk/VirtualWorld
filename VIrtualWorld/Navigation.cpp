@@ -11,19 +11,34 @@ namespace Navigation {
 
 		switch (dir) {
 		case NORTH:
-			point.x++;
+			point.y--;
 			break;
 		case EAST:
-			point.y++;
+			point.x++;
 			break;
 		case SOUTH:
-			point.x--;
+			point.y++;
 			break;
 		case WEST:
-			point.y--;
+			point.x--;
 			break;
 		}
 
 		return point;
+	}
+	std::string ToString(WorldDirections dir) {
+
+		switch (dir) {
+			case NORTH:
+				return "North";
+			case EAST:
+				return "East ";
+			case SOUTH:
+				return "South";
+			case WEST:
+				return "West ";
+			default:
+				return "";
+			}
 	}
 }

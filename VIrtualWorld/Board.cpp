@@ -14,11 +14,16 @@ Board::Board(int r, int c, World* w) {
 	for (int i = 0; i < row*col; i++) {
 		organisms[i] = nullptr;
 	}
-
-	DrawOutline();
 }
 Board::~Board() {
 	delete[] organisms;
+}
+
+int Board::GetRow() {
+	return row;
+}
+int Board::GetCol() {
+	return col;
 }
 
 bool Board::Validate(Point p) {
@@ -28,19 +33,6 @@ bool Board::Validate(Point p) {
 	else {
 		return true;
 	}
-}
-inline int Board::GetIndex(Point p) {
-	return p.y * row + p.x;
-}
-int Board::GetRow() {
-	return row;
-}
-int Board::GetCol() {
-	return col;
-}
-
-inline Organism* Board::GetAt(Point p) {
-	return organisms[GetIndex(p)];
 }
 
 Point Board::SeekForFree(Point p) {
@@ -76,7 +68,6 @@ Point Board::SeekForFree(Point p) {
 
 	return seekBuffer[Utilities::random(0, seekBuffer.size())];
 }
-
 void Board::SetAt(Organism* o) {
 	
 	seekBuffer.clear();
@@ -133,6 +124,9 @@ void Board::KillAt(Point p) {
 
 	organisms[GetIndex(p)] = nullptr;
 }
+inline Organism* Board::GetAt(Point p) {
+	return organisms[GetIndex(p)];
+}
 
 void Board::Draw() {
 
@@ -155,44 +149,8 @@ void Board::Draw() {
 			}
 		}
 	}
-
-	/*for (int i = 0; i < row*col; i++) {
-
-		if (i % row == 0) {
-			gotoxy(BOARD_X_ORIGIN)
-		}
-
-		Organism* organism = organisms[i];
-
-		if (organism == nullptr) {
-			putch(' ');
-		}
-		else {
-			organism->Draw();
-		}
-	}*/
-
 }
 
-void Board::DrawOutline() {
-
-	gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() - 1);
-
-	textbackground(WHITE);
-
-	for (int i = 0; i < col+2; i++) {
-		putch(' ');
-	}
-	for (int i = 0; i < row; i++) {
-		gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() + i);
-		putch(' ');
-		gotoxy(world->GetLayout()->GetBoardX() + col, world->GetLayout()->GetBoardY() + i);
-		putch(' ');
-	}
-
-	gotoxy(world->GetLayout()->GetBoardX() - 1, world->GetLayout()->GetBoardY() + row);
-
-	for (int i = 0; i < col + 2; i++) {
-		putch(' ');
-	}
+inline int Board::GetIndex(Point p) {
+	return p.y * row + p.x;
 }
