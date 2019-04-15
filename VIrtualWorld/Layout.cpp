@@ -19,7 +19,7 @@ void Layout::Init() {
 	SetLegendWidth(0);
 	SetLegendHeigth(0);
 
-	SetLegendWidth(30);
+	SetLegendWidth(35);
 	SetLegendHeigth(20);
 }
 

@@ -5,6 +5,8 @@
 #include "Navigation.h"
 #include "Layout.h"
 
+#define ARANDOM 0
+
 class Board;
 class Organism;
 class Human;
@@ -35,6 +37,7 @@ class World {
 		void Draw();
 		void LegendUpdate(WorldDirections dir = DIR_NULL, std::string s = "");
 		WorldDirections GetInput(WorldDirections dir, Point p);
+		void ClearOutput();
 
 	private:
 
@@ -49,14 +52,13 @@ class World {
 		Layout* layout;
 
 		void Populate(int n);
-		Organism* Create(std::string s, int a);
+		Organism* Create(char c, int a);
 
 		void NextTurn();
 
 		void DrawOutline(int x, int y, int height, int width);
 		void DrawLegend();
 		void ClearLegend();
-		void ClearOutput();
 
 		void Save();
 		void Load();
@@ -71,6 +73,7 @@ public:
 	int GetStrength();
 	void SetStrength(int value);
 	int GetAge();
+	char GetImage();
 
 	virtual bool IsAnimal() = 0;
 	bool IsAlive();

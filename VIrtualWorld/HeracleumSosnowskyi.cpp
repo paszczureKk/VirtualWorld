@@ -10,7 +10,7 @@ void HeracleumSosnowskyi::Action() {
 			if (o->IsAnimal() == false) {
 				return false;
 				}
-			if (typeid(o).name() == typeid(CyberSheep).name()) {
+			if (o->ToString() == "CyberSheep") {
 				return false;
 			}
 			return true;
@@ -23,7 +23,7 @@ bool HeracleumSosnowskyi::Collision(Organism* o) {
 
 	this->Kill(o->ToString());
 
-	if (typeid(o).name() != typeid(CyberSheep).name()) {
+	if (o->ToString() != "CyberSheep") {
 		o->Kill(this->ToString());
 	}
 

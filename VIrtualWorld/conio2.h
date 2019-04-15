@@ -14,8 +14,8 @@
 #define KEY_RIGHT 0x4d
 #define KEY_ACCEPT 0x0d
 #define KEY_SPECIAL 0x20
-#define KEY_SAVE 0x53
-#define KEY_LOAD 0x4c
+#define KEY_SAVE 0x73
+#define KEY_LOAD 0x6c
 
 #define BLACK		0
 #define BLUE		1

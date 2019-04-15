@@ -19,25 +19,29 @@ Human::Human(int a, World* w) : Animal(5, 4, a, 'P', w) {
 
 void Human::Action() {
 
+	bool moved = true;
+
 	world->LegendUpdate();
 
 	CoolDown();
-	ActiveDown();
 
 	world->Draw();
 
 	if (ActionAbility != nullptr) {
-		if ((this->*ActionAbility)() == false) {
-			world->LegendUpdate();
-			return;
-		}
+		moved = ((this->*ActionAbility)());
+	}
+
+	ActiveDown();
+
+	if (moved == false) {
+		return;
 	}
 
 	MakeMove();
 
 	world->LegendUpdate();
+	world->ClearOutput();
 }
-
 bool Human::Collision(Organism* o) {
 	if (CollisionAbility != nullptr) {
 		if ((this->*CollisionAbility)(o) == false) {
@@ -46,6 +50,14 @@ bool Human::Collision(Organism* o) {
 	}
 
 	return true;
+}
+void Human::Kill(std::string s) {
+	if (immortal == true) {
+		return;
+	}
+	else {
+		Organism::Kill(s);
+	}
 }
 
 std::string Human::ToString() {
@@ -60,18 +72,19 @@ void Human::CoolDown() {
 void Human::ActiveDown() {
 	if (active > 0) {
 		active--;
-	}
-	else {
-		collisionActive = false;
-		actionActive = false;
-		CollisionAbility = nullptr;
-		ActionAbility = nullptr;
-		cooldown = 5;
+		if (active == 0) {
+			collisionActive = false;
+			actionActive = false;
+			CollisionAbility = nullptr;
+			ActionAbility = nullptr;
+			cooldown = 5;
+			immortal = false;
+		}
 	}
 }
 
 void Human::Special() {
-	if (cooldown > 0) {
+	if (cooldown > 0 || active > 0) {
 		return;
 	}
 
@@ -84,6 +97,7 @@ void Human::Special() {
 			break;
 		case IMMORTALITY:
 			collisionActive = true;
+			immortal = true;
 			CollisionAbility = &Human::Immortality;
 			break;
 		case BURNTOFFERING:
@@ -96,35 +110,49 @@ void Human::Special() {
 			break;
 		case MAGICPOTION:
 			actionActive = true;
+			this->Buff(10);
 			ActionAbility = &Human::MagicPotion;
 			break;
 		default:
 			break;
 	}
+
+	AbilityRandom();
 }
 
 bool Human::AlzursShield(Organism* o) {
 
 	o->Move(Navigation::Translate(location));
 
+	world->Draw();
+	world->LegendUpdate();
+
 	return false;
 }
 
 bool Human::Immortality(Organism* o) {
+
 	Point p = this->location;
 
 	this->Move(Navigation::Translate(location));
 	o->Move(p);
 
+	world->Draw();
+	world->LegendUpdate();
+
 	return false;
 }
 bool Human::MagicPotion() {
+
 	this->Buff(-2);
 	return true;
 }
 bool Human::AntelopeSpeed() {
+
 	for (int i = 0; i < 2; i++) {
 		if (this->IsAlive()) {
+			world->Draw();
+			world->LegendUpdate();
 			MakeMove();
 		}
 	}
@@ -132,6 +160,7 @@ bool Human::AntelopeSpeed() {
 	return false;
 }
 bool Human::BurntOffering() {
+
 	world->RemoveFromWorld(this->ToString(), location,
 		[](Organism* o) -> bool {
 		if (o == nullptr) {
@@ -140,6 +169,9 @@ bool Human::BurntOffering() {
 
 		return true;
 	});
+
+	world->Draw();
+	world->LegendUpdate();
 
 	return true;
 }
@@ -161,30 +193,47 @@ std::string Human::GetAbility() {
 	}
 }
 
+int Human::GetCooldown() {
+	return cooldown;
+}
+int Human::GetDuration() {
+	return active;
+}
+
 void Human::MakeMove() {
 
 	WorldDirections dir = DIR_NULL;
+	   
+	do {
+		dir = world->GetInput(dir, location);
 
-	dir = world->GetInput(dir, location);
-
-	if (dir == DIR_NULL) {
-		Special();
-	}
-
-	if (ActionAbility != nullptr) {
-		if ((this->*ActionAbility)() == false) {
-			return;
+		if (dir == DIR_NULL) {
+			Special();
 		}
-	}
+	} while (dir == DIR_NULL);
 
 	Move(Navigation::Translate(location, dir));
 }
 
 void Human::AbilityRandom() {
+	if (ARANDOM == 0) {
+		ability = ALZURSSHIELD;
+		return;
+	}
+
 	float prob = 1.0f / ABILITY_COUNT;
 
 	float r = Utilities::random(0.0f, 1.0f);
 	int a = (int)(r / prob);
 
 	ability = (Ability)a;
+}
+
+bool Human::IsActive() {
+	if (actionActive == true || collisionActive == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

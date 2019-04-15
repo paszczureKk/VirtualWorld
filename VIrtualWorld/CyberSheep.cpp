@@ -10,7 +10,7 @@ void CyberSheep::Action() {
 }
 
 bool CyberSheep::Collision(Organism* o) {
-	if (typeid(o).name() == typeid(HeracleumSosnowskyi).name()) {
+	if (o->ToString() == "HeracleumSosnowskyi") {
 		o->Kill(this->ToString());
 		return false;
 	}

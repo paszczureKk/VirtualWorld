@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "World.h"
 #include "Navigation.h"
 
@@ -5,6 +7,7 @@
 #include "Utilities.h"
 
 #include "conio2.h"
+
 
 World::World(int rows, int cols, int oc) {
 	organismsC = 0;
@@ -51,6 +54,9 @@ void World::Start() {
 		NextTurn();
 		ClearLegend();
 	}
+	ClearOutput();
+	Draw();
+	Notify("You died. ");
 }
 void World::Notify(std::string s) {
 
@@ -58,6 +64,10 @@ void World::Notify(std::string s) {
 
 	textbackground(BLACK);
 	textcolor(WHITE);
+
+	if (layout->GetOutputHeight() == 15) {
+		ClearOutput();
+	}
 
 	Utilities::print(s);
 
@@ -170,6 +180,25 @@ void World::LegendUpdate(WorldDirections dir, std::string s) {
 		gotoxy(layout->GetLegendX() + 1, layout->GetLegendY() + 13);
 		Utilities::print(s);
 	}
+
+	temp.str("");
+	temp.clear();
+
+	gotoxy(layout->GetLegendX() + 1, layout->GetLegendY() + 15);
+	temp << "Cooldown: " << player->GetCooldown();
+	Utilities::print(temp.str());
+
+	temp.str("");
+	temp.clear();
+
+	gotoxy(layout->GetLegendX() + 1, layout->GetLegendY() + 16);
+	temp << "Duration: " << player->GetDuration();
+	Utilities::print(temp.str());
+
+	if (player->IsActive() == true) {
+		gotoxy(layout->GetLegendX() + 1, layout->GetLegendY() + 17);
+		Utilities::print("Player empowered");
+	}
 }
 WorldDirections World::GetInput(WorldDirections dir, Point p) {
 
@@ -245,28 +274,54 @@ void World::Populate(int n = 2) {
 		AddToWorld((Organism*)new Grass(GetAge(), this));
 		AddToWorld((Organism*)new Guarana(GetAge(), this));
 		AddToWorld((Organism*)new HeracleumSosnowskyi(GetAge(), this));
+
+
+		//AddToWorld((Organism*)new Fox(GetAge(), this));
 	}
 }
-Organism* World::Create(std::string s, int a) {
+Organism* World::Create(char c, int a) {
 
 	Organism* o = nullptr;
 
-	switch (Utilities::str2int(s.c_str())) {
-		case Utilities::str2int("Antelope"):
+	switch (c) {
+		case 'A':
 			o = (Organism*) new Antelope(a, this);
-		case Utilities::str2int("CyberSheep"):
-		case Utilities::str2int("Fox"):
-		case Utilities::str2int("Sheep"):
-		case Utilities::str2int("Turtle"):
-		case Utilities::str2int("Wolf"):
+			break;
+		case 'C':
+			o = (Organism*) new CyberSheep(a, this);
+			break;
+		case 'F':
+			o = (Organism*) new Fox(a, this);
+			break;
+		case 'S':
+			o = (Organism*) new Sheep(a, this);
+			break;
+		case 'T':
+			o = (Organism*) new Turtle(a, this);
+			break;
+		case 'W':
+			o = (Organism*) new Wolf(a, this);
+			break;
 
-		case Utilities::str2int("Belladonna"):
-		case Utilities::str2int("Dandelion"):
-		case Utilities::str2int("Grass"):
-		case Utilities::str2int("Guarana"):
-		case Utilities::str2int("HeracleumSosnowskyi"):
+		case 'B':
+			o = (Organism*) new Belladonna(a, this);
+			break;
+		case 'D':
+			o = (Organism*) new Dandelion(a, this);
+			break;
+		case 'G':
+			o = (Organism*) new Grass(a, this);
+			break;
+		case 'U':
+			o = (Organism*) new Guarana(a, this);
+			break;
+		case 'H':
+			o = (Organism*) new HeracleumSosnowskyi(a, this);
+			break;
 
-		case Utilities::str2int("Player"):
+		case 'P':
+			o = (Organism*) new Human(a, this);
+			break;
 	}
 
 	return o;
@@ -341,10 +396,13 @@ void World::ClearOutput() {
 	for (int i = 0; i < layout->GetOutputHeight(); i++) {
 		gotoxy(layout->GetOutputX(), layout->GetOutputY() + i);
 
-		for (int j = 0; j < layout->GetOutputWidth(); i++) {
+		for (int j = 0; j < layout->GetOutputWidth(); j++) {
 			putch(' ');
 		}
 	}
+
+	layout->SetOutputWidth(0);
+	layout->SetOutputHeight(0);
 }
 
 void World::Save() {
@@ -365,7 +423,7 @@ void World::Save() {
 	fprintf(file, "%d\n", organismsC);
 
 	//board
-	fprintf(file, "%d,%d", board->GetRow(), board->GetCol());
+	fprintf(file, "%d,%d\n", board->GetRow(), board->GetCol());
 
 	//organisms
 	for (int y = 0; y < board->GetRow(); y++)
@@ -377,7 +435,7 @@ void World::Save() {
 				fprintf(file, "%d\n", 0);
 			}
 			else {
-				fprintf(file, "%d,%s,%d,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+				fprintf(file, "%d,%c,%d,%d,%d,%d\n", 1, o->GetImage(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
 			}
 		}
 	}
@@ -389,7 +447,7 @@ void World::Save() {
 			fprintf(file, "%d\n", 0);
 		}
 		else {
-			fprintf(file, "%d,%s,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+			fprintf(file, "%d,%c,%d,%d,%d,%d\n", 1, o->GetImage(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
 		}
 	}
 	//dead
@@ -399,7 +457,7 @@ void World::Save() {
 			fprintf(file, "%d\n", 0);
 		}
 		else {
-			fprintf(file, "%d,%s,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+			fprintf(file, "%d,%c,%d,%d,%d,%d\n", 1, o->GetImage(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
 		}
 	}
 
@@ -442,8 +500,11 @@ void World::Load() {
 	delete board;
 	board = new Board(a1, a2, this);
 
+	born.clear();
+	dead.clear();
+
 	int b1, b2, b3, b4, b5;
-	std::string s;
+	char c;
 
 	//organisms
 	for (int i = 0; i < a1*a2; i++) {
@@ -453,20 +514,23 @@ void World::Load() {
 			continue;
 		}
 
-		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+		fscanf(file, ",%c,%d,%d,%d,%d", &c, &b2, &b3, &b4, &b5);
 
-		Organism* o = Create(s, b2);
+		Organism* o = Create(c, b2);
 		o->SetStrength(b3);
-		o->SetLocation({ b4,b5 });
-		AddToWorld(o, o->GetLocation());
+		o->SetLocation(NULL_POINT);
+
+		if (o != nullptr) {
+			AddToWorld(o, { b4,b5 });
+		}
+
+		if (o->ToString() == "Player") {
+			player = (Human*)o;
+		}
 	}
 
 	//born
 	fscanf(file, "%d\n", &a1);
-	for (Organism* o : born) {
-		delete o;
-	}
-	born.clear();
 	for (int i = 0; i < a1; i++) {
 		fscanf(file, "%d", &b1);
 
@@ -474,20 +538,13 @@ void World::Load() {
 			continue;
 		}
 
-		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+		fscanf(file, ",%c,%d,%d,%d,%d", &c, &b2, &b3, &b4, &b5);
 
-		Organism* o = Create(s, b2);
-		o->SetStrength(b3);
-		o->SetLocation({ b4,b5 });
-		born.push_back(o);
+		born.push_back(board->GetAt({ b4,b5 }));
 	}
 
 	//dead
 	fscanf(file, "%d\n", &a1);
-	for (Organism* o : dead) {
-		delete o;
-	}
-	born.clear();
 	for (int i = 0; i < a1; i++) {
 		fscanf(file, "%d", &b1);
 
@@ -495,12 +552,10 @@ void World::Load() {
 			continue;
 		}
 
-		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+		fscanf(file, ",%c,%d,%d,%d,%d", &c, &b2, &b3, &b4, &b5);
 
-		Organism* o = Create(s, b2);
-		o->SetStrength(b3);
-		o->SetLocation({ b4,b5 });
-		dead.push_back(o);
+
+		dead.push_back(board->GetAt({ b4,b5 }));
 	}
 
 	fclose(file);

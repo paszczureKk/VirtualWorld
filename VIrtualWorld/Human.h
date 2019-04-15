@@ -9,8 +9,15 @@ class Human : public Animal<Human> {
 		Human(int a, World* w);
 		void Action() override;
 		bool Collision(Organism* o) override;
+		void Kill(std::string s) override;
+
 		std::string ToString() override;
 		std::string GetAbility();
+
+		int GetCooldown();
+		int GetDuration();
+
+		bool IsActive();
 	private:
 
 		enum Ability {
@@ -24,6 +31,7 @@ class Human : public Animal<Human> {
 
 		int cooldown;
 		int active;
+		bool immortal;
 
 		void CoolDown();
 		void ActiveDown();

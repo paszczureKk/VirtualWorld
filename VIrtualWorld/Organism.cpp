@@ -30,6 +30,9 @@ void Organism::SetStrength(int value) {
 int Organism::GetAge() {
 	return age;
 }
+char Organism::GetImage() {
+	return image;
+}
 
 bool Organism::IsAlive() {
 	return alive;

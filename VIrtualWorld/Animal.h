@@ -63,7 +63,7 @@ class Animal : public Organism {
 			Organism& base = *this;
 			Organism& other = *o;
 
-			if (typeid(this).name() == typeid(o).name())
+			if (o->ToString() == this->ToString())
 				return true;
 
 			return false;

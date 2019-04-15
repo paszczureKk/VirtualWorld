@@ -22,6 +22,9 @@ namespace Utilities {
 		_setcursortype(_NOCURSOR);
 
 		srand((unsigned int)time(NULL));
+		for (int i = 0; i < 100; i++) {
+			rand();
+		}
 	}
 	float random(float min, float max) {
 		return rand() / (RAND_MAX / (max - min) ) + min;
