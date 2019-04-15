@@ -2,6 +2,7 @@
 #include "Navigation.h"
 
 #include "OrganismsHeaders.h"
+#include "Utilities.h"
 
 #include "conio2.h"
 
@@ -37,6 +38,9 @@ void World::LayoutInit(int r, int c) {
 
 int World::GetAge() {
 	return ++organismsC;
+}
+void World::SetAge(int value) {
+	organismsC = value;
 }
 Layout* World::GetLayout() {
 	return layout;
@@ -213,6 +217,7 @@ WorldDirections World::GetInput(WorldDirections dir, Point p) {
 				break;
 			case KEY_LOAD:
 				Load();
+				ClearOutput();
 				Draw();
 				LegendUpdate();
 				break;
@@ -241,6 +246,30 @@ void World::Populate(int n = 2) {
 		AddToWorld((Organism*)new Guarana(GetAge(), this));
 		AddToWorld((Organism*)new HeracleumSosnowskyi(GetAge(), this));
 	}
+}
+Organism* World::Create(std::string s, int a) {
+
+	Organism* o = nullptr;
+
+	switch (Utilities::str2int(s.c_str())) {
+		case Utilities::str2int("Antelope"):
+			o = (Organism*) new Antelope(a, this);
+		case Utilities::str2int("CyberSheep"):
+		case Utilities::str2int("Fox"):
+		case Utilities::str2int("Sheep"):
+		case Utilities::str2int("Turtle"):
+		case Utilities::str2int("Wolf"):
+
+		case Utilities::str2int("Belladonna"):
+		case Utilities::str2int("Dandelion"):
+		case Utilities::str2int("Grass"):
+		case Utilities::str2int("Guarana"):
+		case Utilities::str2int("HeracleumSosnowskyi"):
+
+		case Utilities::str2int("Player"):
+	}
+
+	return o;
 }
 
 void World::NextTurn() {
@@ -320,7 +349,160 @@ void World::ClearOutput() {
 
 void World::Save() {
 
+	FILE* file = fopen("save.txt", "w");
+
+	//saving
+
+	//	layout
+	//board
+	fprintf(file, "%d,%d\n", layout->GetBoardX(), layout->GetBoardY());
+	//output
+	fprintf(file, "%d,%d,%d,%d\n", layout->GetOutputX(), layout->GetOutputY(), layout->GetOutputWidth(), layout->GetOutputHeight());
+	//legend
+	fprintf(file, "%d,%d,%d,%d\n", layout->GetLegendX(), layout->GetLegendY(), layout->GetLegendWidth(), layout->GetLegendHeight());
+
+	//world
+	fprintf(file, "%d\n", organismsC);
+
+	//board
+	fprintf(file, "%d,%d", board->GetRow(), board->GetCol());
+
+	//organisms
+	for (int y = 0; y < board->GetRow(); y++)
+	{
+		for (int x = 0; x < board->GetCol(); x++) {
+			Organism* o = GetAt({ x, y });
+
+			if (o == nullptr) {
+				fprintf(file, "%d\n", 0);
+			}
+			else {
+				fprintf(file, "%d,%s,%d,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+			}
+		}
+	}
+
+	//born
+	fprintf(file, "%d\n", born.size());
+	for (Organism* o : born) {
+		if (o == nullptr) {
+			fprintf(file, "%d\n", 0);
+		}
+		else {
+			fprintf(file, "%d,%s,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+		}
+	}
+	//dead
+	fprintf(file, "%d\n", dead.size());
+	for (Organism* o : dead) {
+		if (o == nullptr) {
+			fprintf(file, "%d\n", 0);
+		}
+		else {
+			fprintf(file, "%d,%s,%d,%d,%d", 1, o->ToString(), o->GetAge(), o->GetStrength(), o->GetLocation().x, o->GetLocation().y);
+		}
+	}
+
+	fclose(file);
+	Notify("Saving complete!");
 }
 void World::Load() {
+	FILE* file = fopen("save.txt", "r");
 
+	if (file == NULL) {
+		return;
+	}
+
+	int a1, a2, a3, a4;
+
+	//layout
+	//board
+	fscanf(file, "%d,%d", &a1, &a2);
+	layout->SetBoardX(a1);
+	layout->SetBoardY(a2);
+	//output
+	fscanf(file, "%d,%d,%d,%d", &a1, &a2, &a3, &a4);
+	layout->SetOutputX(a1);
+	layout->SetOutputY(a2);
+	layout->SetOutputWidth(a3);
+	layout->SetOutputHeight(a4);
+	//legend
+	fscanf(file, "%d,%d,%d,%d", &a1, &a2, &a3, &a4);
+	layout->SetLegendX(a1);
+	layout->SetLegendY(a2);
+	layout->SetLegendWidth(a3);
+	layout->SetLegendHeigth(a4);
+
+	//world
+	fscanf(file, "%d", &a1);
+	this->SetAge(a1);
+
+	fscanf(file, "%d,%d", &a1, &a2);
+
+	delete board;
+	board = new Board(a1, a2, this);
+
+	int b1, b2, b3, b4, b5;
+	std::string s;
+
+	//organisms
+	for (int i = 0; i < a1*a2; i++) {
+		fscanf(file, "%d", &b1);
+
+		if (b1 == 0) {
+			continue;
+		}
+
+		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+
+		Organism* o = Create(s, b2);
+		o->SetStrength(b3);
+		o->SetLocation({ b4,b5 });
+		AddToWorld(o, o->GetLocation());
+	}
+
+	//born
+	fscanf(file, "%d\n", &a1);
+	for (Organism* o : born) {
+		delete o;
+	}
+	born.clear();
+	for (int i = 0; i < a1; i++) {
+		fscanf(file, "%d", &b1);
+
+		if (b1 == 0) {
+			continue;
+		}
+
+		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+
+		Organism* o = Create(s, b2);
+		o->SetStrength(b3);
+		o->SetLocation({ b4,b5 });
+		born.push_back(o);
+	}
+
+	//dead
+	fscanf(file, "%d\n", &a1);
+	for (Organism* o : dead) {
+		delete o;
+	}
+	born.clear();
+	for (int i = 0; i < a1; i++) {
+		fscanf(file, "%d", &b1);
+
+		if (b1 == 0) {
+			continue;
+		}
+
+		fscanf(file, "%s,%d,%d,%d,%d", s, &b2, &b3, &b4, &b5);
+
+		Organism* o = Create(s, b2);
+		o->SetStrength(b3);
+		o->SetLocation({ b4,b5 });
+		dead.push_back(o);
+	}
+
+	fclose(file);
+	Notify("Loading complete!");
 }

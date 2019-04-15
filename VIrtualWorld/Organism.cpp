@@ -24,6 +24,12 @@ void Organism::SetLocation(Point p) {
 int Organism::GetStrength() {
 	return strength;
 }
+void Organism::SetStrength(int value) {
+	strength = value;
+}
+int Organism::GetAge() {
+	return age;
+}
 
 bool Organism::IsAlive() {
 	return alive;

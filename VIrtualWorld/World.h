@@ -17,6 +17,7 @@ class World {
 		void LayoutInit(int r, int c);
 
 		int GetAge();
+		void SetAge(int value);
 		Layout* GetLayout();
 
 		void Start();
@@ -48,6 +49,7 @@ class World {
 		Layout* layout;
 
 		void Populate(int n);
+		Organism* Create(std::string s, int a);
 
 		void NextTurn();
 
@@ -67,6 +69,8 @@ public:
 	Point GetLocation();
 	void SetLocation(Point p);
 	int GetStrength();
+	void SetStrength(int value);
+	int GetAge();
 
 	virtual bool IsAnimal() = 0;
 	bool IsAlive();
