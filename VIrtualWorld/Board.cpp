@@ -66,7 +66,7 @@ Point Board::SeekForFree(Point p) {
 		return NULL_POINT;
 	}
 
-	return seekBuffer[Utilities::random(0, seekBuffer.size())];
+	return seekBuffer[Utilities::random(0, (int)seekBuffer.size())];
 }
 void Board::SetAt(Organism* o) {
 	
@@ -94,7 +94,7 @@ void Board::SetAt(Organism* o) {
 		organisms[GetIndex(o->GetLocation())] = nullptr;
 	}
 
-	temp = seekBuffer[Utilities::random(0, seekBuffer.size())];
+	temp = seekBuffer[Utilities::random(0, (int)seekBuffer.size())];
 	o->SetLocation(temp);
 	organisms[GetIndex(temp)] = o;
 }
